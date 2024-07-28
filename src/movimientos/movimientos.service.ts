@@ -3,7 +3,6 @@ import { CreateMovimientoDto } from './dto/create-movimiento.dto';
 import { PrismaClient } from '@prisma/client';
 import { CuentasService } from 'src/cuentas/cuentas.service';
 import { RpcException } from '@nestjs/microservices';
-
 @Injectable()
 export class MovimientosService extends PrismaClient implements OnModuleInit {
   constructor(private readonly cuentaServices: CuentasService) {
