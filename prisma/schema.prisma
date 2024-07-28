@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+enum TipoCuenta {
+  Corriente
+  Ahorro
+}
+enum TipoMovimiento {
+  Retiro
+  Deposito
+}
+model Cuenta {
+  id    Int     @default(autoincrement()) @id
+  cliente String //Aqui se va guardar el nombre
+  identificacion String //Aqui se va a guardar la cedula
+  saldoInicial Float
+  tipoCuenta TipoCuenta    
+  estado  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  movimientos Movimientos[]
+}
+
+model Movimientos {
+  id        Int      @default(autoincrement()) @id
+  cuentaId  Int? 
+  tipoMovimiento TipoMovimiento
+  valor Float
+  saldo Float
+  cuenta    Cuenta?    @relation(fields: [cuentaId], references: [id])
+  fecha DateTime
+  hora String
+  createdAt DateTime @default(now())
+}
