@@ -1,1 +1,2 @@
 export const CLIENTE_SERVICE = 'CLIENTE_SERVICE';
+export const NATS_SERVICE = 'NATS_SERVICE';

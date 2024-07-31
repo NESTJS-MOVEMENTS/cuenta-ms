@@ -8,13 +8,14 @@ import {
 import { PrismaClient } from '@prisma/client';
 import { ParamsReporte } from './dto/params-reporte.dto';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
-import { CLIENTE_SERVICE } from 'src/config';
+import { NATS_SERVICE } from '../config';
 import { catchError, lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class ReportesService extends PrismaClient implements OnModuleInit {
   constructor(
-    @Inject(CLIENTE_SERVICE) private readonly clienteClient: ClientProxy,
+    // @Inject(CLIENTE_SERVICE) private readonly clienteClient: ClientProxy,
+    @Inject(NATS_SERVICE) private readonly clienteClient: ClientProxy,
   ) {
     super();
   }

@@ -9,14 +9,17 @@ import { CreateCuentaDto } from './dto/create-cuenta.dto';
 //import { UpdateCuentaDto } from './dto/update-cuenta.dto';
 import { PrismaClient, TipoMovimiento } from '@prisma/client';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
-import { CLIENTE_SERVICE } from 'src/config';
+import { NATS_SERVICE } from '../config';
 import { catchError, lastValueFrom } from 'rxjs';
 import { Cliente } from './interfaces';
 import { ChangeCuentaStatus } from './dto/change-cuenta-status.dto';
 @Injectable()
 export class CuentasService extends PrismaClient implements OnModuleInit {
   constructor(
-    @Inject(CLIENTE_SERVICE) private readonly clienteClient: ClientProxy,
+    //? Via TCP
+    //@Inject(CLIENTE_SERVICE) private readonly clienteClient: ClientProxy,
+    //? Via NATS
+    @Inject(NATS_SERVICE) private readonly clienteClient: ClientProxy,
   ) {
     super();
   }
